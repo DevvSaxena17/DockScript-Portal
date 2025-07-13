@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DockScript Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <style>
+    html {
+      box-sizing: border-box;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+    :root {
+      --primary: #3bb6c5;
+      --primary-dark: #2a7f8e;
+      --secondary: #6c63ff;
+      --accent: #f5f7fa;
+      --card-bg: #fff;
+      --card-shadow: 0 8px 32px 0 rgba(60, 120, 180, 0.13);
+      --text-main: #222b45;
+      --text-muted: #6c7a89;
+      --footer-bg: #eaf6fa;
+      --border-radius: 24px;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #eaf6fa 0%, #b6e0f7 100%);
+      color: var(--text-main);
+      font-family: 'Nunito', Arial, sans-serif;
+      min-height: 100vh;
+      font-size: 18px;
+      line-height: 1.6;
+      width: 100vw;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+        body {
+      font-family: 'Nunito', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    .app-name,
+    h1, h2, .hero-title, .card-section h2 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    .nav-btn,
+    label,
+    input,
+    textarea {
+      font-family: 'Nunito', Arial, sans-serif;
+    }
+    .card-section button, .search-bar button {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+    }
+    /* Navbar */
+    .navbar {
+      width: 100%;
+      max-width: 100vw;
+      background: rgba(255,255,255,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      box-shadow: 0 2px 16px 0 rgba(60, 120, 180, 0.07);
+      border-bottom: 1.5px solid #e0e7ef;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+      min-height: 4.5rem;
+    }
+    .navbar .app-name {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+      padding: 1.2rem 0;
+    }
+    .navbar .nav-btns {
+      display: flex;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--primary-dark);
+      font-size: 1.15rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 16px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+      font-weight: 700;
+    }
+    .nav-btn.active, .nav-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 2px 8px 0 rgba(60, 120, 180, 0.10);
+      transform: translateY(-2px) scale(1.04);
+    }
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 48vh;
+      padding: 4.5rem 1.2rem 3.5rem 1.2rem;
+      text-align: center;
+      width: 100%;
+      max-width: 100vw;
+    }
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      margin-top: 0;
+    }
+    .hero-sub {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-weight: 500;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-radius: 32px;
+      box-shadow: 0 2px 16px 0 rgba(60, 120, 180, 0.10);
+      padding: 10px 16px 10px 32px;
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+    .search-bar input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 1.15rem;
+      flex: 1;
+      padding: 14px 0;
+      color: var(--text-main);
+    }
+    .search-bar button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: 1.1rem 2.5rem;
+      margin-left: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .search-bar button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px) scale(1.04);
+    }
+    /* Sections */
+    .sections {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 0 auto;
+      padding-bottom: 4.5rem;
+      box-sizing: border-box;
+    }
+    .card-section {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      padding: 2.8rem 2.2rem 2.2rem 2.2rem;
+            display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: box-shadow 0.2s;
+      min-width: 0;
+      margin-bottom: 0;
+      width: 100%;
+      max-width: 100vw;
+      box-sizing: border-box;
+    }
+    .card-section.active {
+      display: flex;
+      animation: fadeIn 0.7s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card-section h2 {
+      color: var(--primary-dark);
+      margin-bottom: 2rem;
+      font-size: 1.7rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      margin-top: 0;
+    }
+    .card-section label {
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+      align-self: flex-start;
+      font-size: 1.08rem;
+      margin-top: 1.2rem;
+    }
+    .card-section label:first-of-type {
+      margin-top: 0;
+    }
+    .card-section input, .card-section textarea {
+      width: 100%;
+      padding: 1.1rem 1rem;
+      margin-bottom: 1.3rem;
+      border-radius: 14px;
+      border: 1.5px solid #e0e7ef;
+      background: #f5f7fa;
+      color: var(--text-main);
+      font-size: 1.1rem;
+      outline: none;
+      min-height: 48px;
+      transition: border 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+    .card-section input:focus, .card-section textarea:focus {
+      border: 1.5px solid var(--primary);
+      box-shadow: 0 0 8px var(--primary);
+      background: #eaf6fa;
+    }
+    .card-section button, .card-section a[download], #send-photo-email, #send-video-email {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 1.1rem 2.5rem;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 24px 0 rgba(60,120,180,0.13);
+            cursor: pointer;
+      margin-top: 1.5rem;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .card-section button:hover {
+      background: var(--primary-dark);
+      color: #fff;
+      box-shadow: 0 8px 32px 0 rgba(60,120,180,0.18);
+      transform: translateY(-2px) scale(1.03);
+    }
+    .docker-terminal {
+      width: 100%;
+      background: #f5f7fa;
+      color: var(--primary-dark);
+      font-family: monospace;
+      border-radius: 14px;
+      padding: 1.5rem 1.2rem;
+      margin: 1.2rem 0 0 0;
+      border: 1.5px dashed #b6e0f7;
+      font-size: 1.13rem;
+      box-shadow: 0 4px 24px 0 rgba(60,120,180,0.10);
+      white-space: pre-line;
+      box-sizing: border-box;
+    }
+    .footer {
+      margin-top: 5rem;
+      background: var(--footer-bg);
+      color: var(--primary-dark);
+      text-align: center;
+      padding: 2.5rem 0 2rem 0;
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      border-top: 1.5px solid #e0e7ef;
+      box-shadow: 0 -4px 32px 0 rgba(60, 120, 180, 0.09);
+      width: 100vw;
+      box-sizing: border-box;
+    }
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .navbar {
+        padding: 0 8px;
+      }
+      .navbar .app-name {
+        font-size: 1.1rem;
+        padding: 10px 0;
+      }
+      .nav-btns {
+        gap: 4px;
+      }
+      .nav-btn {
+        font-size: 1rem;
+        padding: 10px 12px;
+      }
+      .hero { padding: 3rem 1rem 2rem 1rem; }
+      .sections { gap: 2rem; }
+      .card-section { padding: 1.5rem 2vw 1.2rem 2vw; }
+      .card-section h2 { font-size: 1.1rem; margin-bottom: 18px; }
+      .card-section button { font-size: 1rem; padding: 12px 20px; margin-top: 18px; }
+      .docker-terminal { font-size: 0.98rem; padding: 12px 4px; }
+    }
+    @media (max-width: 900px) {
+      .navbar { padding: 0 2px; }
+      .navbar .app-name { font-size: 1rem; padding: 8px 0; }
+      .nav-btns { gap: 2px; }
+      .hero { padding: 1.5rem 0.5rem 1rem 0.5rem; }
+      .sections { padding: 0 1vw; gap: 1.1rem; }
+      .card-section { padding: 0.7rem 1vw 0.5rem 1vw; }
+      .card-section h2 { font-size: 1rem; margin-bottom: 10px; }
+      .card-section button { font-size: 0.95rem; padding: 10px 12px; margin-top: 10px; }
+      .docker-terminal { font-size: 0.92rem; padding: 8px 2px; }
+      .footer { margin-top: 2rem; padding: 1.2rem 0 0.7rem 0; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="app-name" style="cursor:pointer;" onclick="goHome()">DockScript Portal</div>
+    <div class="nav-btns">
+      <button class="nav-btn active" id="nav-camera" onclick="showSection('camera', this)">📸 Camera</button>
+      <button class="nav-btn" id="nav-record-video" onclick="showSection('record-video', this)">🎥 Record Video</button>
+      <button class="nav-btn" id="nav-email" onclick="showSection('email', this)">📧 Email</button>
+      <button class="nav-btn" id="nav-whatsapp" onclick="showSection('whatsapp', this)">📱 WhatsApp</button>
+    </div>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="hero-title">Discover. Learn. Enjoy</div>
+    <div class="hero-sub">Run essential utilities in one place</div>
+    <div style="display: flex; justify-content: center;">
+      <button class="search-bar" style="font-size:1.18rem; font-weight:800; padding:18px 56px; border-radius:32px; background:var(--primary); color:#fff; border:none; box-shadow:0 2px 16px 0 rgba(60,120,180,0.10); cursor:pointer;" onclick="scrollToFirstSection()">Get Started</button>
+    </div>
+  </section>
+
+  <div class="sections">
+    <section class="card-section active" id="camera">
+      <h2>📸 Camera</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; justify-content: center; width: 100%;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <video id="video" autoplay playsinline style="width:100%;max-width:340px; border-radius: 10px; background: #222;"></video>
+          <canvas id="canvas" width="340" height="255" style="display:none;"></canvas>
+          <button style="margin-top: 18px; width: 220px;" onclick="capturePhoto()">Capture Photo</button>
+        </div>
+        <div id="photo-container" style="display: none; flex-direction: column; align-items: center;">
+          <img id="photo-preview" style="max-width:340px; border-radius:10px; box-shadow:0 0 8px #b6e0f7; background: #222;" />
+          <a id="download-photo" style="margin-top: 16px; display: inline-block; background: var(--primary); color: #fff; font-weight: 700; padding: 12px 32px; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 8px 0 rgba(60,120,180,0.10);" download="photo.png">Download Photo</a>
+          <button id="send-photo-email" style="margin-top: 12px; display: none; background: var(--primary); color: #fff; font-weight: 700; padding: 12px 32px; border-radius: 8px; box-shadow: 0 2px 8px 0 rgba(60,120,180,0.10); border: none;">Send Photo via Email</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card-section" id="record-video">
+      <h2>🎥 Record Video</h2>
+      <video id="recordedVideo" style="width:100%;max-width:340px; border-radius: 10px; background: #222;" autoplay playsinline></video>
+      <div style="display: flex; gap: 18px; margin-top: 18px;">
+            <button onclick="startRecording()">Start Recording</button>
+            <button onclick="stopRecording()">Stop Recording</button>
+        <a id="downloadVideo" style="display:none; background: var(--primary); color: #fff; font-weight: 700; padding: 12px 32px; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 8px 0 rgba(60,120,180,0.10);" download="recorded.webm">Download Video</a>
+        <button id="send-video-email" style="display:none; background: var(--primary); color: #fff; font-weight: 700; padding: 12px 32px; border-radius: 8px; box-shadow: 0 2px 8px 0 rgba(60,120,180,0.10); border: none;">Send Video via Email</button>
+      </div>
+        </section>
+
+    <section class="card-section" id="email">
+      <h2>📧 Email</h2>
+      <label for="emailName">Name</label>
+      <input type="text" id="emailName" placeholder="Your Name" />
+      <label for="toEmail">Email</label>
+      <input type="email" id="toEmail" placeholder="Your Email" />
+      <label for="emailSubject">Subject</label>
+      <input type="text" id="emailSubject" placeholder="Subject" />
+      <label for="emailMsg">Message</label>
+            <textarea id="emailMsg" placeholder="Enter your message"></textarea>
+            <button onclick="sendEmail()">Send Email</button>
+        </section>
+
+    <section class="card-section" id="whatsapp">
+      <h2>📲 WhatsApp</h2>
+      <label for="wa_number">Phone Number (with country code)</label>
+      <input type="tel" id="wa_number" placeholder="e.g. 9198xxxxx210" />
+      <label for="wa_message">Message</label>
+      <input type="text" id="wa_message" placeholder="Type your message" />
+            <button onclick="sendWhatsApp()">Send WhatsApp</button>
+        </section>
+    </div>
+
+  <div class="footer">Created with 💙 by Devv Saxena</div>
+
+    <script>
+    // Navbar section switching
+    function showSection(sectionId, btn) {
+      document.querySelectorAll('.card-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      // Scroll to section on mobile
+      document.getElementById(sectionId).scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    // Get Started scroll
+    function scrollToFirstSection() {
+      showSection('camera', document.getElementById('nav-camera'));
+      document.getElementById('camera').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    function goHome() {
+      // Hide all card sections
+      document.querySelectorAll('.card-section').forEach(sec => sec.classList.remove('active'));
+      // Remove active from all nav buttons
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      // Scroll to hero section
+      document.getElementById('hero').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    // Camera logic
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+    const photoPreview = document.getElementById('photo-preview');
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => { video.srcObject = stream; })
+        .catch(() => alert('Camera access denied'));
+    }
+        function capturePhoto() {
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+      const dataURL = canvas.toDataURL('image/png');
+      const photoPreview = document.getElementById('photo-preview');
+      const photoContainer = document.getElementById('photo-container');
+      const downloadBtn = document.getElementById('download-photo');
+      const sendPhotoBtn = document.getElementById('send-photo-email');
+      photoPreview.src = dataURL;
+      photoContainer.style.display = 'flex';
+      downloadBtn.href = dataURL;
+      sendPhotoBtn.style.display = 'inline-block';
+      sendPhotoBtn.onclick = function() {
+        showSection('email', document.getElementById('nav-email'));
+        document.getElementById('emailMsg').value = 'Photo attached below.\n\n<img src="' + dataURL + '" alt="Photo" style="max-width:100%;" />';
+      };
+    }
+    // EmailJS logic
+    emailjs.init("kyPr-2Bkf9-gnT4VF");
+    function sendEmail() {
+      const name = document.getElementById("emailName").value;
+      const email = document.getElementById("toEmail").value;
+      const subject = document.getElementById("emailSubject").value;
+      const message = document.getElementById("emailMsg").value;
+      if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      const params = { name, email, subject, message };
+      emailjs.send("service_devvsaxena", "template_owner_notify", params)
+        .then(() => alert("✅ Email sent!"))
+        .catch(err => alert("❌ Failed: " + err));
+    }
+    // WhatsApp logic
+    function sendWhatsApp() {
+      const number = document.getElementById("wa_number").value;
+      const message = document.getElementById("wa_message").value;
+      if (!number.trim() || !message.trim()) {
+        alert('Please enter both phone number and message.');
+        return;
+      }
+      const cleanNumber = number.replace(/\D/g, '');
+      window.open(`https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`, "_blank");
+    }
+    // --- Video Recording Logic ---
+    let mediaRecorder;
+    let recordedChunks = [];
+    const recordedVideo = document.getElementById('recordedVideo');
+    const downloadVideo = document.getElementById('downloadVideo');
+    let streamRef = null;
+    let isRecording = false;
+
+        function startRecording() {
+      recordedChunks = [];
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
+          streamRef = stream;
+          recordedVideo.srcObject = stream;
+          recordedVideo.controls = false;
+          recordedVideo.muted = true;
+          recordedVideo.play();
+          mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder.ondataavailable = e => {
+            if (e.data.size > 0) recordedChunks.push(e.data);
+          };
+            mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks, { type: 'video/webm' });
+            const url = URL.createObjectURL(blob);
+            recordedVideo.srcObject = null;
+            recordedVideo.src = url;
+            recordedVideo.controls = true;
+            recordedVideo.muted = false;
+            downloadVideo.href = url;
+            downloadVideo.style.display = 'inline-block';
+            const sendVideoBtn = document.getElementById('send-video-email');
+            sendVideoBtn.style.display = 'inline-block';
+            // Read blob as base64 for email
+            sendVideoBtn.onclick = function() {
+              const reader = new FileReader();
+              reader.onloadend = function() {
+                showSection('email', document.getElementById('nav-email'));
+                document.getElementById('emailMsg').value = 'Video attached below.\n\n<video controls style="max-width:100%;"><source src="' + reader.result + '" type="video/webm"></video>';
+              };
+              reader.readAsDataURL(blob);
+            };
+            // Stop all tracks to release the camera
+            if (streamRef) {
+              streamRef.getTracks().forEach(track => track.stop());
+            }
+            console.log('Recording stopped, video available for download.');
+            };
+            mediaRecorder.start();
+          downloadVideo.style.display = 'none';
+          console.log('Recording started.');
+          isRecording = true;
+        })
+        .catch(err => {
+          alert('Could not access camera/microphone: ' + err.message);
+          console.error(err);
+        });
+        }
+
+        function stopRecording() {
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+            mediaRecorder.stop();
+        console.log('Stopping recording...');
+        isRecording = false;
+      }
+        }
+    </script>
+</body>
+</html>
