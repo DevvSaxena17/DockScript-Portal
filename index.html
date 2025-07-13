@@ -336,6 +336,7 @@
       <button class="nav-btn" id="nav-record-video" onclick="showSection('record-video', this)">🎥 Record Video</button>
       <button class="nav-btn" id="nav-email" onclick="showSection('email', this)">📧 Email</button>
       <button class="nav-btn" id="nav-whatsapp" onclick="showSection('whatsapp', this)">📱 WhatsApp</button>
+      <button class="nav-btn" id="nav-docker" onclick="showSection('docker-commands', this)">🐳 Docker</button>
     </div>
   </nav>
 
@@ -396,7 +397,64 @@
       <input type="text" id="wa_message" placeholder="Type your message" />
             <button onclick="sendWhatsApp()">Send WhatsApp</button>
         </section>
-    </div>
+
+    <section class="card-section" id="docker-commands">
+      <h2>🐳 Docker Commands & Uses</h2>
+      <div style="width:100%;">
+        <div style="margin-bottom: 1.5rem;">
+          <strong>Run a container interactively:</strong>
+          <pre style="background:#f5f7fa; border-radius:8px; padding:1rem; margin-top:0.5rem;">docker run -it ubuntu</pre>
+          <span style="color:var(--text-muted);">Start a new Ubuntu container with interactive shell.</span>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <strong>List running containers:</strong>
+          <pre style="background:#f5f7fa; border-radius:8px; padding:1rem; margin-top:0.5rem;">docker ps</pre>
+          <span style="color:var(--text-muted);">Show all currently running containers.</span>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <strong>List all containers (including stopped):</strong>
+          <pre style="background:#f5f7fa; border-radius:8px; padding:1rem; margin-top:0.5rem;">docker ps -a</pre>
+          <span style="color:var(--text-muted);">Show all containers, running or stopped.</span>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <strong>Build an image from Dockerfile:</strong>
+          <pre style="background:#f5f7fa; border-radius:8px; padding:1rem; margin-top:0.5rem;">docker build -t myimage:latest .</pre>
+          <span style="color:var(--text-muted);">Build a Docker image from the current directory.</span>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <strong>List images:</strong>
+          <pre style="background:#f5f7fa; border-radius:8px; padding:1rem; margin-top:0.5rem;">docker images</pre>
+          <span style="color:var(--text-muted);">Show all Docker images on your system.</span>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <strong>Stop a running container:</strong>
+          <pre style="background:#f5f7fa; border-radius:8px; padding:1rem; margin-top:0.5rem;">docker stop &lt;container_id&gt;</pre>
+          <span style="color:var(--text-muted);">Stop a running container by its ID or name.</span>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <strong>Remove a container:</strong>
+          <pre style="background:#f5f7fa; border-radius:8px; padding:1rem; margin-top:0.5rem;">docker rm &lt;container_id&gt;</pre>
+          <span style="color:var(--text-muted);">Delete a stopped container.</span>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <strong>Remove an image:</strong>
+          <pre style="background:#f5f7fa; border-radius:8px; padding:1rem; margin-top:0.5rem;">docker rmi &lt;image_id&gt;</pre>
+          <span style="color:var(--text-muted);">Delete a Docker image by its ID or name.</span>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <strong>View container logs:</strong>
+          <pre style="background:#f5f7fa; border-radius:8px; padding:1rem; margin-top:0.5rem;">docker logs &lt;container_id&gt;</pre>
+          <span style="color:var(--text-muted);">Show logs for a running container.</span>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <strong>Execute a command in a running container:</strong>
+          <pre style="background:#f5f7fa; border-radius:8px; padding:1rem; margin-top:0.5rem;">docker exec -it &lt;container_id&gt; bash</pre>
+          <span style="color:var(--text-muted);">Open a bash shell inside a running container.</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
 
   <div class="footer">Created with 💙 by Devv Saxena</div>
 
