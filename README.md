@@ -1,6 +1,6 @@
-"DOCKSCRIPT PORTAL"
+"UTILIHUB JS"
 
-DockScript Portal is a sleek, browser-powered utility dashboard built entirely using HTML, CSS, and JavaScript—with no backend dependencies. It offers a responsive interface that brings together everyday automation tools in one place. Link - https://dockscriptportal.netlify.app/
+UtiliHub JS is a sleek, browser-powered utility dashboard built entirely using HTML, CSS, and JavaScript—with no backend dependencies. It offers a responsive interface that brings together everyday automation tools in one place. Link - https://dockscriptportal.netlify.app/
 
 🔧 Features:-
 
@@ -56,14 +56,20 @@ Devv Saxena
 
 Screenshots :-
 
-<img width="1891" height="939" alt="image" src="https://github.com/user-attachments/assets/52eed9ff-9e99-43c9-88dd-926b237b1245" />
+<img width="1886" height="941" alt="image" src="https://github.com/user-attachments/assets/ab495cb9-ef3b-47d7-9053-b18ca3f37419" />
 
-<img width="1888" height="944" alt="image" src="https://github.com/user-attachments/assets/726fd937-e541-4216-8e49-7dd2ae1d505e" />
 
-<img width="993" height="827" alt="image" src="https://github.com/user-attachments/assets/edfd41fc-b007-43c7-97d1-6bcbaba7bec6" />
+<img width="1372" height="922" alt="image" src="https://github.com/user-attachments/assets/cd182b33-9f2f-46f5-9847-04b681fece15" />
 
-<img width="1400" height="898" alt="image" src="https://github.com/user-attachments/assets/28477819-90fd-4617-93be-e024e1c659f9" />
 
-<img width="1881" height="939" alt="image" src="https://github.com/user-attachments/assets/59d2769e-d297-4f94-9dd3-e23519ae406b" />
+<img width="1340" height="691" alt="image" src="https://github.com/user-attachments/assets/67c23989-4efc-4abc-8d27-f9e81d968ec6" />
+
+
+<img width="1141" height="861" alt="image" src="https://github.com/user-attachments/assets/0d6a7d43-c244-40be-b659-fe7e89add8d4" />
+
+
+<img width="1885" height="941" alt="image" src="https://github.com/user-attachments/assets/25e84c15-8883-4b68-82a5-802aafa918b8" />
+
+
 
 
