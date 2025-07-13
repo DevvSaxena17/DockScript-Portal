@@ -1,6 +1,6 @@
 "UTILIHUB JS"
 
-UtiliHub JS is a sleek, browser-powered utility dashboard built entirely using HTML, CSS, and JavaScript—with no backend dependencies. It offers a responsive interface that brings together everyday automation tools in one place. Link - https://dockscriptportal.netlify.app/
+UtiliHub JS is a sleek, browser-powered utility dashboard built entirely using HTML, CSS, and JavaScript—with no backend dependencies. It offers a responsive interface that brings together everyday automation tools in one place. Link - https://utilihub.netlify.app/
 
 🔧 Features:-
 
